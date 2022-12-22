@@ -24,7 +24,7 @@ public class R1 {
     private LocalDateTime operationStart;
     @NotBlank(message = "Field cant be empty!")
     private String operation;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME , pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
     @NotNull(message = "Field cant be null!")
     private LocalDateTime operationFinish;
 }

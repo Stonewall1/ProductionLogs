@@ -3,7 +3,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 1
-      author: Stonewall1
+      author: Stonewall
       changes:
         - createTable:
             tableName: r1
@@ -14,7 +14,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    nullable: true
+                    nullable: false
               - column:
                   name: operation_start
                   type: datetime(50)
@@ -24,7 +24,7 @@ databaseChangeLog:
                   name: operation
                   type: varchar(512)
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: operation_finish
                   type: datetime(50)
