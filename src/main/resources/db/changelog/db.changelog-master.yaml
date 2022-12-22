@@ -1,30 +1,30 @@
-#databaseChangeLog:
-#  - logicalFilePath: db/changelog/db.changelog-liquitest1.yaml
-#
-#  - changeSet:
-#      id: 1
-#      author: Stonewall1
-#      changes:
-#        - createTable:
-#            tableName: r1
-#            columns:
-#              - column:
-#                  name: id
-#                  type: BIGINT
-#                  autoIncrement: true
-#                  constraints:
-#                    primaryKey: true
-#                    nullable: true
-#              - column:
-#                  name: operation_start
-#                  type: datetime(50)
-#                  constraints:
-#                    nullable: false
-#              - column:
-#                  name: operation
-#                  type: varchar(512)
-#                  constraints:
-#                    nullable: true
-#              - column:
-#                  name: operation_finish
-#                  type: datetime(50)
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-masterlog.yaml
+
+  - changeSet:
+      id: 1
+      author: Stonewall1
+      changes:
+        - createTable:
+            tableName: r1
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: operation_start
+                  type: datetime(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: operation
+                  type: varchar(512)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: operation_finish
+                  type: datetime(50)
