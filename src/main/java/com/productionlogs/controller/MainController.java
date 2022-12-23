@@ -2,6 +2,7 @@ package com.productionlogs.controller;
 
 import com.productionlogs.entity.R1;
 import com.productionlogs.repository.R1Repository;
+import com.productionlogs.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ import java.util.List;
 @RequestMapping("/")
 public class MainController {
     private final R1Repository r1Repository;
+    private final UserRepository userRepository;
 
-    public MainController(R1Repository r1Repository) {
+    public MainController(R1Repository r1Repository, UserRepository userRepository) {
         this.r1Repository = r1Repository;
+        this.userRepository = userRepository;
     }
 
 

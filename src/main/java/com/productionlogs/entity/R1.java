@@ -27,4 +27,6 @@ public class R1 {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
     @NotNull(message = "Field cant be null!")
     private LocalDateTime operationFinish;
+    @ManyToOne
+    private User user;
 }
