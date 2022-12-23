@@ -10,13 +10,7 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-4 text-center mt-5 ">
-            <a href="/r1" class="btn btn-primary">R-1</a>
-
-            <ul th:each="operation : ${allOps}">
-                <li>
-                    <h6 th:text="${#temporals.format(operation.operationStart, 'dd.MM.yyyy HH:mm')}"></h6>
-                </li>
-            </ul>
+            <a th:href="@{reactor/r1}" class="btn btn-primary">R-1</a>
         </div>
     </div>
 </div>

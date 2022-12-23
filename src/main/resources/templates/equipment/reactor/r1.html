@@ -12,8 +12,9 @@
     <div class="row justify-content-center mt-5">
         <div class="col-4 text-center mt-5 ">
             <h3>Submit operation</h3>
-            <form th:action="@{/r1}" th:object="${newOp}" method="post">
-                <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"  placeholder="Operation start"/>
+            <form th:action="@{/reactor/r1}" th:object="${newOp}" method="post">
+                <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"
+                       placeholder="Operation start"/>
                 <br>
                 <p th:if="${#fields.hasErrors('operationStart')}" th:errors="*{operationStart}" style="color: red"></p>
 
@@ -21,11 +22,18 @@
                 <br>
                 <p th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}" style="color: red"></p>
 
-                <input type="datetime-local" th:field="*{operationFinish}" class="form-control" placeholder="Operation finish"/>
+                <input type="datetime-local" th:field="*{operationFinish}" class="form-control"
+                       placeholder="Operation finish"/>
                 <br>
-                <p th:if="${#fields.hasErrors('operationFinish')}" th:errors="*{operationFinish}" style="color: red"></p>
+                <p th:if="${#fields.hasErrors('operationFinish')}" th:errors="*{operationFinish}"
+                   style="color: red"></p>
                 <button class="btn btn-success">Submit</button>
             </form>
+            <ul th:each="operation : ${allOps}">
+                <li>
+                    <h6 th:text="${#temporals.format(operation.operationStart, 'dd.MM.yyyy HH:mm')}"></h6>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
