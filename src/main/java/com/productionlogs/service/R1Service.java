@@ -7,6 +7,7 @@ import com.productionlogs.service.mapper.R1Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -33,5 +34,13 @@ public class R1Service {
     @Transactional(readOnly = true)
     public List<R1> findAll() {
         return r1Repository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<R1> findAllInDescendingOrder() {
+        return r1Repository.findAll()
+                .stream()
+                .sorted(Comparator.comparingLong(R1::getId).reversed())
+                .toList();
     }
 }

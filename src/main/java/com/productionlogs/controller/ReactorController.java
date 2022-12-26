@@ -25,7 +25,7 @@ public class ReactorController {
 
     @GetMapping("/r1")
     public String r1(R1Dto r1Dto, Model model) {
-        model.addAttribute("allR1Ops", r1Service.findAll());
+        model.addAttribute("allR1Ops", r1Service.findAllInDescendingOrder());
         r1Dto.setOperationStart(LocalDateTime.now());
         r1Dto.setOperationFinish(LocalDateTime.now());
         model.addAttribute("newOp", r1Dto);
@@ -33,8 +33,9 @@ public class ReactorController {
     }
 
     @PostMapping("/r1")
-    public String r1(@Valid @ModelAttribute("newOp") R1Dto r1Dto, BindingResult bindingResult) {
+    public String r1(@Valid @ModelAttribute("newOp") R1Dto r1Dto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("allR1Ops", r1Service.findAllInDescendingOrder());
             return "equipment/reactor/r1";
         }
         R1 r1 = r1Service.map(r1Dto);
