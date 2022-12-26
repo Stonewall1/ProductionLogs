@@ -25,7 +25,7 @@ public class ReactorController {
 
     @GetMapping("/r1")
     public String r1(R1Dto r1Dto, Model model) {
-        model.addAttribute("allOps", r1Service.findAll());
+        model.addAttribute("allR1Ops", r1Service.findAll());
         r1Dto.setOperationStart(LocalDateTime.now());
         r1Dto.setOperationFinish(LocalDateTime.now());
         model.addAttribute("newOp", r1Dto);
