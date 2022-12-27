@@ -4,6 +4,8 @@ import com.productionlogs.dto.R1Dto;
 import com.productionlogs.entity.R1;
 import com.productionlogs.repository.R1Repository;
 import com.productionlogs.service.mapper.R1Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,10 @@ public class R1Service {
     @Transactional(readOnly = true)
     public List<R1> findAll() {
         return r1Repository.findAll();
+    }
+
+    public Page<R1> findAll(Pageable pageable) {
+        return r1Repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)

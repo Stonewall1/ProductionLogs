@@ -18,7 +18,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-6 text-center mt-5">
+        <div class="col-6 text-center">
             <h1 class="display-3">Reactor R-1</h1>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
@@ -48,6 +48,7 @@
             <table class="table">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Operation start</th>
                     <th>Operation</th>
                     <th>Operation finish</th>
@@ -57,6 +58,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="operation : ${allR1Ops}">
+                    <td th:text="${operation.id}"></td>
                     <td th:text="${#temporals.format(operation.operationStart, 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="${operation.operation}"></td>
                     <td th:text="${#temporals.format(operation.operationFinish, 'dd.MM.yyyy HH:mm')}"></td>
@@ -70,10 +72,20 @@
                     <!--                    </td>-->
                 </tbody>
             </table>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="${url + '?page=' + 0}" th:text="'First page'"></a>
+                </li>
+                <th:block th:each="i : ${#numbers.sequence(1, allR1Ops.getTotalPages() - 1)}">
+                    <li class="page-item">
+                        <a class="page-link" th:href="${url + '?page=' + i}" th:text="${i + 1}"></a>
+                    </li>
+                </th:block>
+            </ul>
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-4 text-center mt-5 ">
+            <div class="col-4 text-center mt-5">
                 <a href="/" class="btn btn-primary mb-5">Back to Homepage</a>
             </div>
         </div>
