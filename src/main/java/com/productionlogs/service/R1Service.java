@@ -1,6 +1,7 @@
 package com.productionlogs.service;
 
 import com.productionlogs.dto.R1Dto;
+import com.productionlogs.entity.OperationStatus;
 import com.productionlogs.entity.R1;
 import com.productionlogs.repository.R1Repository;
 import com.productionlogs.service.mapper.R1Mapper;
@@ -26,6 +27,7 @@ public class R1Service {
     //  TODO adding user here
 
     public void save(R1 r1) {
+        r1.setOperationStatus(OperationStatus.UNVERIFIED);
         r1Repository.save(r1);
     }
 

@@ -21,6 +21,8 @@ public class R1 {
     private LocalDateTime operationFinish;
     @ManyToOne
     private User user;
+    @Enumerated(EnumType.STRING)
+    private OperationStatus operationStatus;
 
     public R1(LocalDateTime operationStart, String operation, LocalDateTime operationFinish) {
         this.operationStart = operationStart;

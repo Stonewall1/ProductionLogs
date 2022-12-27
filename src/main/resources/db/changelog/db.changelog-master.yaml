@@ -5,5 +5,7 @@ databaseChangeLog:
       file: db/changelog/db.changelog2-createR1table.sql
   - include:
       file: db/changelog/db.changelog3-addUserToR1.sql
+  - include:
+      file: db/changelog/db.changelog4-addStatusToR1.sql
 #  - include:
 #      file: db/changelog/db.changelog0-truncate.sql
