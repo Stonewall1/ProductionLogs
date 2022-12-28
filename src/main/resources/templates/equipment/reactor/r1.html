@@ -54,6 +54,9 @@
                     <th scope="col">Operation finish</th>
                     <th scope="col">Operator</th>
                     <th scope="col">Operation status</th>
+                    <!-- ADMIN ROLE CHECKING -->
+                    <th scope="col">Verification</th>
+                    <!--                        -->
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +67,14 @@
                     <td th:text="${#temporals.format(operation.operationFinish, 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="'RESERVED'"></td>
                     <td th:text="${operation.operationStatus}"></td>
+                    <!-- ADMIN ROLE CHECKING -->
+                    <td>
+                        <form th:action="@{/reactor/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allR1Ops.getNumber()})}"
+                              method="post">
+                            <button class="btn btn-outline-success">Verify</button>
+                        </form>
+                    </td>
+                    <!--                        -->
                 </tbody>
             </table>
             <!-- PAGINATION -->

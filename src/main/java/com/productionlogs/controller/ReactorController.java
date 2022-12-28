@@ -12,10 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -52,5 +49,12 @@ public class ReactorController {
         R1 r1 = r1Service.map(r1Dto);
         r1Service.save(r1);
         return "redirect:/reactor/r1";
+    }
+
+    @PostMapping("/r1/{id}/{page}/updateStatus")
+    public String updateStatus(@PathVariable("id") long id, @PathVariable("page") int currentPage) {
+        R1 byId = r1Service.findById(id);
+        r1Service.changeOperationStatus(byId);
+        return "redirect:/reactor/r1?page=" + currentPage;
     }
 }

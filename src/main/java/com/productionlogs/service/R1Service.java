@@ -3,6 +3,7 @@ package com.productionlogs.service;
 import com.productionlogs.dto.R1Dto;
 import com.productionlogs.entity.OperationStatus;
 import com.productionlogs.entity.R1;
+import com.productionlogs.exception.IDNotFoundException;
 import com.productionlogs.repository.R1Repository;
 import com.productionlogs.service.mapper.R1Mapper;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -50,5 +52,16 @@ public class R1Service {
                 .stream()
                 .sorted(Comparator.comparingLong(R1::getId).reversed())
                 .toList();
+    }
+
+    public R1 findById(long id) {
+        Optional<R1> byId = r1Repository.findById(id);
+        if (byId.isPresent()) {
+            return byId.get();
+        } else throw new IDNotFoundException();
+    }
+
+    public void changeOperationStatus(R1 r1) {
+        r1.setOperationStatus(OperationStatus.VERIFIED);
     }
 }
