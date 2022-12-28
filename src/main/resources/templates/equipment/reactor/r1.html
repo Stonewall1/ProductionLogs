@@ -66,7 +66,12 @@
                     <td th:text="${operation.operation}"></td>
                     <td th:text="${#temporals.format(operation.operationFinish, 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="'RESERVED'"></td>
-                    <td th:text="${operation.operationStatus}"></td>
+                    <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
+                        <td th:text="${operation.operationStatus}" style="color: red"></td>
+                    </th:block>
+                    <th:block th:if="${operation.operationStatus.name() == 'VERIFIED'}">
+                        <td th:text="${operation.operationStatus}" style="color: green"></td>
+                    </th:block>
                     <!-- ADMIN ROLE CHECKING -->
                     <td>
                         <form th:action="@{/reactor/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allR1Ops.getNumber()})}"
