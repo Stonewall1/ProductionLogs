@@ -1,5 +1,6 @@
 package com.productionlogs.controller;
 
+import com.productionlogs.constant.PageSizes;
 import com.productionlogs.dto.R1Dto;
 import com.productionlogs.entity.R1;
 import com.productionlogs.service.R1Service;
@@ -28,7 +29,7 @@ public class ReactorController {
     }
 
     @GetMapping("/r1")
-    public String r1(R1Dto r1Dto, Model model, @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 3) Pageable pageable) {
+    public String r1(R1Dto r1Dto, Model model, @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = PageSizes.PAGE_SIZE) Pageable pageable) {
         Page<R1> page = r1Service.findAll(pageable);
         model.addAttribute("allR1Ops", page);
         r1Dto.setOperationStart(LocalDateTime.now());
@@ -40,7 +41,7 @@ public class ReactorController {
 
     @PostMapping("/r1")
     public String r1(@Valid @ModelAttribute("newOp") R1Dto r1Dto, BindingResult bindingResult, Model model,
-                     @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 3) Pageable pageable) {
+                     @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = PageSizes.PAGE_SIZE) Pageable pageable) {
         if (bindingResult.hasErrors()) {
             Page<R1> page = r1Service.findAll(pageable);
             model.addAttribute("allR1Ops", page);
