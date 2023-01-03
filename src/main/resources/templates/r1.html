@@ -22,17 +22,17 @@
             <h1 class="display-3">Reactor R-1</h1>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
-            <form th:action="@{/reactor/r1}" th:object="${newOp}" method="post">
+            <form th:action="@{/journal/r1}" th:object="${newOp}" method="post">
                 <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"
                        placeholder="Operation start"/>
                 <br>
                 <p th:if="${#fields.hasErrors('operationStart')}" th:errors="*{operationStart}" style="color: red"></p>
 
-                <input th:type="search" th:field="*{operation}" class="form-control" placeholder="Operation"
+                <input th:type="search" th:field="*{operationDescription}" class="form-control" placeholder="Operation"
                        list="operationsList">
 
                 <br>
-                <p th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"
+                <p th:if="${#fields.hasErrors('operationDescription')}" th:errors="*{operationDescription}"
                    style="color: red"></p>
 
                 <input type="datetime-local" th:field="*{operationFinish}" class="form-control"
@@ -75,7 +75,7 @@
                     <!-- ADMIN ROLE CHECKING -->
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
                         <td>
-                            <form th:action="@{/reactor/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allR1Ops.getNumber()})}"
+                            <form th:action="@{/journal/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allR1Ops.getNumber()})}"
                                   method="post">
                                 <button class="btn btn-outline-success">Verify</button>
                             </form>

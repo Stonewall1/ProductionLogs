@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class R1Dto {
+public class OperationDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
     @NotNull(message = "Field cant be null!")
     private LocalDateTime operationStart;
     @NotBlank(message = "Field cant be empty!")
-    private String operation;
+    private String operationDescription;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
     @NotNull(message = "Field cant be null!")
     private LocalDateTime operationFinish;
