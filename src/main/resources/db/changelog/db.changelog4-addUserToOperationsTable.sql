@@ -6,4 +6,4 @@
 
 ALTER TABLE operations
     ADD user_id BIGINT,
-    ADD CONSTRAINT r1_user_fk FOREIGN KEY (user_id) REFERENCES users (id)
+    ADD CONSTRAINT operations_user_fk FOREIGN KEY (user_id) REFERENCES users (id)
