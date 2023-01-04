@@ -18,6 +18,6 @@ public class JournalController {
     public String updateStatus(@PathVariable("EquipmentId") long equipmentId, @PathVariable("OperationId") long operationId, @PathVariable("page") int currentPage) {
         Operation byId = journalService.findById(operationId);
         journalService.changeOperationStatus(byId);
-        return "redirect:/equipment/equipmentPage/" + equipmentId + "?page=" + currentPage;
+        return "redirect:/equipment/equipmentPage/".concat(String.valueOf(equipmentId)).concat("?page=").concat(String.valueOf(currentPage));
     }
 }
