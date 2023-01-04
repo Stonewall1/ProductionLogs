@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>R1</title>
+    <title>Equipment Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <datalist id="operationsList">
     <option th:value="'Cleaning'">
+    <option th:value="'Operation 1'">
     <option th:value="'Operation 2'">
     <option th:value="'Operation 3'">
-    <option th:value="'Operation 4'">
         <!--    IN CASE OF LIST FROM BACKEND-->
         <!--    <option th:each="option : ${LIST OR ENUM}" th:value="${PROPERTY}">-->
 </datalist>
@@ -19,10 +19,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h1 class="display-3">Reactor R-1</h1>
+            <h1 th:text="${equipment.equipmentName}" class="display-3"></h1>
+            <h3 th:text="${equipment.equipmentDescription}"></h3>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
-            <form th:action="@{/journal/r1}" th:object="${newOp}" method="post">
+            <form th:action="@{/equipment/equipmentPage/{id} (id = ${equipment.id})}" th:object="${newOp}" method="post">
                 <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"
                        placeholder="Operation start"/>
                 <br>
@@ -60,10 +61,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="operation : ${allR1Ops}">
+                <tr th:each="operation : ${allOps}">
                     <td th:text="${operation.id}"></td>
                     <td th:text="${#temporals.format(operation.operationStart, 'dd.MM.yyyy HH:mm')}"></td>
-                    <td th:text="${operation.operation}"></td>
+                    <td th:text="${operation.operationDescription}"></td>
                     <td th:text="${#temporals.format(operation.operationFinish, 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="'RESERVED'"></td>
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
@@ -74,12 +75,12 @@
                     </th:block>
                     <!-- ADMIN ROLE CHECKING -->
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
-                        <td>
-                            <form th:action="@{/journal/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allR1Ops.getNumber()})}"
-                                  method="post">
-                                <button class="btn btn-outline-success">Verify</button>
-                            </form>
-                        </td>
+                        <!--                        <td>-->
+                        <!--                            <form th:action="@{/journal/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allOps.getNumber()})}"-->
+                        <!--                                  method="post">-->
+                        <!--                                <button class="btn btn-outline-success">Verify</button>-->
+                        <!--                            </form>-->
+                        <!--                        </td>-->
                     </th:block>
                     <th:block th:if="${operation.operationStatus.name() == 'VERIFIED'}">
                         <td>
@@ -97,14 +98,14 @@
                 <li class="page-item disabled">
                     <a class="page-link" href="#">Pages</a>
                 </li>
-                <th:block th:each="i : ${#numbers.sequence(1, allR1Ops.getTotalPages())}">
-                    <th:block th:if="${i - 1 == allR1Ops.getNumber()}">
+                <th:block th:each="i : ${#numbers.sequence(1, allOps.getTotalPages())}">
+                    <th:block th:if="${i - 1 == allOps.getNumber()}">
                         <li class="page-item active">
                             <a class="page-link" href="#" th:text="${i}"></a>
                         </li>
                     </th:block>
 
-                    <th:block th:if="${i != -1 and i - 1 != allR1Ops.getNumber()}">
+                    <th:block th:if="${i != -1 and i - 1 != allOps.getNumber()}">
                         <li class="page-item">
                             <a class="page-link" th:href="${url + '?page=' + (i - 1)}" th:text="${i}"></a>
                         </li>

@@ -1,6 +1,7 @@
 package com.productionlogs.service;
 
 import com.productionlogs.dto.OperationDto;
+import com.productionlogs.entity.Operation;
 import com.productionlogs.entity.OperationStatus;
 import com.productionlogs.exception.IDNotFoundException;
 import com.productionlogs.repository.OperationRepository;
@@ -27,40 +28,44 @@ public class JournalService {
 
     //  TODO adding user here
 
-//    public void save(R1 r1) {
-//        r1.setOperationStatus(OperationStatus.UNVERIFIED);
-//        operationRepository.save(r1);
-//    }
-//
-//    public R1 map(OperationDto operationDto) {
-//        return journalMapper.mapR1DtoToR1(operationDto);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public List<R1> findAll() {
-//        return operationRepository.findAll();
-//    }
-//
-//    public Page<R1> findAll(Pageable pageable) {
-//        return operationRepository.findAll(pageable);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public List<R1> findAllInDescendingOrder() {
-//        return operationRepository.findAll()
-//                .stream()
-//                .sorted(Comparator.comparingLong(R1::getId).reversed())
-//                .toList();
-//    }
-//
-//    public R1 findById(long id) {
-//        Optional<R1> byId = operationRepository.findById(id);
-//        if (byId.isPresent()) {
-//            return byId.get();
-//        } else throw new IDNotFoundException();
-//    }
-//
-//    public void changeOperationStatus(R1 r1) {
-//        r1.setOperationStatus(OperationStatus.VERIFIED);
-//    }
+    public void save(Operation operation) {
+        operation.setOperationStatus(OperationStatus.UNVERIFIED);
+        operationRepository.save(operation);
+    }
+
+    public Operation map(OperationDto operationDto) {
+        return journalMapper.mapOperationDtoToOperation(operationDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Operation> findAll() {
+        return operationRepository.findAll();
+    }
+
+    public Page<Operation> findAll(Pageable pageable) {
+        return operationRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Operation> findAllInDescendingOrder() {
+        return operationRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparingLong(Operation::getId).reversed())
+                .toList();
+    }
+
+    public Page<Operation> findAllOperationsByEquipmentID(Pageable pageable, long id) {
+        return operationRepository.findOperationsByEquipmentId(pageable, id);
+    }
+
+    public Operation findById(long id) {
+        Optional<Operation> byId = operationRepository.findById(id);
+        if (byId.isPresent()) {
+            return byId.get();
+        } else throw new IDNotFoundException();
+    }
+
+    public void changeOperationStatus(Operation operation) {
+        operation.setOperationStatus(OperationStatus.VERIFIED);
+    }
 }

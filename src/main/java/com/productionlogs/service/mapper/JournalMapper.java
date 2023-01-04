@@ -6,5 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface JournalMapper {
-    Operation mapR1DtoToR1(OperationDto operationDto);
+    Operation mapOperationDtoToOperation(OperationDto operationDto);
 }

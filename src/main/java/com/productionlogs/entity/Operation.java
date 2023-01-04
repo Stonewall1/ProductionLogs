@@ -21,6 +21,8 @@ public class Operation {
     private LocalDateTime operationFinish;
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Equipment equipment;
     @Enumerated(EnumType.STRING)
     private OperationStatus operationStatus;
 }
