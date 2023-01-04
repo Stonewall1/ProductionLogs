@@ -23,7 +23,8 @@
             <h3 th:text="${equipment.equipmentDescription}"></h3>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
-            <form th:action="@{/equipment/equipmentPage/{id} (id = ${equipment.id})}" th:object="${newOp}" method="post">
+            <form th:action="@{/equipment/equipmentPage/{id} (id = ${equipment.id})}" th:object="${newOp}"
+                  method="post">
                 <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"
                        placeholder="Operation start"/>
                 <br>
@@ -75,12 +76,12 @@
                     </th:block>
                     <!-- ADMIN ROLE CHECKING -->
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
-                        <!--                        <td>-->
-                        <!--                            <form th:action="@{/journal/r1/{id}/{page}/updateStatus (id = ${operation.id} , page = ${allOps.getNumber()})}"-->
-                        <!--                                  method="post">-->
-                        <!--                                <button class="btn btn-outline-success">Verify</button>-->
-                        <!--                            </form>-->
-                        <!--                        </td>-->
+                        <td>
+                            <form th:action="@{/journal/{id}/{operId}/{page}/updateStatus (id = ${equipment.id} , operId = ${operation.id}, page = ${allOps.getNumber()})}"
+                                  method="post">
+                                <button class="btn btn-outline-success">Verify</button>
+                            </form>
+                        </td>
                     </th:block>
                     <th:block th:if="${operation.operationStatus.name() == 'VERIFIED'}">
                         <td>
@@ -90,7 +91,8 @@
                             </svg>
                         </td>
                     </th:block>
-                    <!--                        -->
+                </tr>
+                <!--                        -->
                 </tbody>
             </table>
             <!-- PAGINATION -->
