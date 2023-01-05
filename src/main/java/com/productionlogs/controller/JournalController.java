@@ -14,8 +14,10 @@ public class JournalController {
         this.journalService = journalService;
     }
 
-    @PostMapping("/{EquipmentId}/{OperationId}/{page}/updateStatus")
-    public String updateStatus(@PathVariable("EquipmentId") long equipmentId, @PathVariable("OperationId") long operationId, @PathVariable("page") int currentPage) {
+    @PostMapping("/{equipmentId}/{operationId}/{page}/updateStatus")
+    public String updateStatus(@PathVariable("equipmentId") long equipmentId,
+                               @PathVariable("operationId") long operationId,
+                               @PathVariable("page") int currentPage) {
         Operation byId = journalService.findById(operationId);
         journalService.changeOperationStatus(byId);
         return "redirect:/equipment/equipmentPage/".concat(String.valueOf(equipmentId)).concat("?page=").concat(String.valueOf(currentPage));

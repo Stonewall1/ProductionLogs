@@ -37,7 +37,7 @@
                 <p th:if="${#fields.hasErrors('operationDescription')}" th:errors="*{operationDescription}"
                    style="color: red"></p>
 
-                <input type="datetime-local" th:field="*{operationFinish}" class="form-control"
+                <input th:type="datetime-local" th:field="*{operationFinish}" class="form-control"
                        placeholder="Operation finish"/>
                 <br>
                 <p th:if="${#fields.hasErrors('operationFinish')}" th:errors="*{operationFinish}"
@@ -110,7 +110,6 @@
                                 <a class="page-link" href="#" th:text="${i}"></a>
                             </li>
                         </th:block>
-
                         <th:block th:if="${i != -1 and i - 1 != allOps.getNumber()}">
                             <li class="page-item">
                                 <a class="page-link" th:href="${url + '?page=' + (i - 1)}" th:text="${i}"></a>

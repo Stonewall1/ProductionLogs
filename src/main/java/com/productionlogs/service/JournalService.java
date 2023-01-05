@@ -1,6 +1,7 @@
 package com.productionlogs.service;
 
 import com.productionlogs.dto.OperationDto;
+import com.productionlogs.entity.Equipment;
 import com.productionlogs.entity.Operation;
 import com.productionlogs.entity.OperationStatus;
 import com.productionlogs.exception.IDNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +35,16 @@ public class JournalService {
         operationRepository.save(operation);
     }
 
-    public Operation map(OperationDto operationDto) {
-        return journalMapper.mapOperationDtoToOperation(operationDto);
+    public Operation mapToOperationAndBindEquipment(OperationDto operationDto, Equipment equipment) {
+        Operation operation = journalMapper.mapOperationDtoToOperation(operationDto);
+        operation.setEquipment(equipment);
+        return operation;
+    }
+
+    public OperationDto presetOperationTime(OperationDto operationDto) {
+        operationDto.setOperationStart(LocalDateTime.now());
+        operationDto.setOperationFinish(LocalDateTime.now());
+        return operationDto;
     }
 
     @Transactional(readOnly = true)
