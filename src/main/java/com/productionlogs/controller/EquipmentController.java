@@ -29,6 +29,17 @@ public class EquipmentController {
         this.journalService = journalService;
     }
 
+    @GetMapping("/equipmentPage/{id}")
+    public String equipmentPage(@PathVariable("id") long id, OperationDto operationDto, Model model,
+                                @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = PageSizes.PAGE_SIZE) Pageable pageable) {
+        model.addAttribute("equipment", equipmentService.findByID(id));
+        Page<Operation> page = journalService.findAllOperationsByEquipmentID(pageable, id);
+        model.addAttribute("allOps", page);
+        model.addAttribute("newOp", journalService.presetOperationTime(operationDto));
+        model.addAttribute("url", "/equipment/equipmentPage/" + id);
+        return "equipment/equipmentPage";
+    }
+
     @GetMapping("/newEquipment")
     public String newEquipment(@ModelAttribute("newEquipment") EquipmentDto equipmentDto) {
         return "equipment/newEquipment";
@@ -42,32 +53,5 @@ public class EquipmentController {
         Equipment equipment = equipmentService.mapToEquipment(equipmentDto);
         equipmentService.save(equipment);
         return "redirect:/";
-    }
-
-    @GetMapping("/equipmentPage/{id}")
-    public String equipmentPage(@PathVariable("id") long id, OperationDto operationDto, Model model,
-                                @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = PageSizes.PAGE_SIZE) Pageable pageable) {
-        model.addAttribute("equipment", equipmentService.findByID(id));
-        Page<Operation> page = journalService.findAllOperationsByEquipmentID(pageable, id);
-        model.addAttribute("allOps", page);
-        model.addAttribute("newOp", journalService.presetOperationTime(operationDto));
-        model.addAttribute("url", "/equipment/equipmentPage/" + id);
-        return "equipment/equipmentPage";
-    }
-
-    @PostMapping("/equipmentPage/{id}")
-    public String equipmentPage(@PathVariable("id") long id, @Valid @ModelAttribute("newOp") OperationDto operationDto, BindingResult bindingResult, Model model,
-                                @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = PageSizes.PAGE_SIZE) Pageable pageable) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("equipment", equipmentService.findByID(id));
-            Page<Operation> page = journalService.findAllOperationsByEquipmentID(pageable, id);
-            model.addAttribute("allOps", page);
-            model.addAttribute("newOp", operationDto);
-            model.addAttribute("url", "/equipment/equipmentPage/" + id);
-            return "equipment/equipmentPage";
-        }
-        Operation operation = journalService.mapToOperationAndBindEquipment(operationDto, equipmentService.findByID(id));
-        journalService.save(operation);
-        return "redirect:/equipment/equipmentPage/" + id;
     }
 }

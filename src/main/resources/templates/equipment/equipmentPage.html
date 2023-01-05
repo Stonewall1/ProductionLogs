@@ -23,7 +23,7 @@
             <h3 th:text="${equipment.equipmentDescription}"></h3><br><br>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
-            <form th:action="@{/equipment/equipmentPage/{id} (id = ${equipment.id})}" th:object="${newOp}"
+            <form th:action="@{/journal/newOperation/{id} (id = ${equipment.id})}" th:object="${newOp}"
                   method="post">
                 <input th:type="datetime-local" th:field="*{operationStart}" class="form-control"
                        placeholder="Operation start"/>
