@@ -11,5 +11,3 @@ databaseChangeLog:
       file: db/changelog/db.changelog5-addOperationStatus.sql
   - include:
       file: db/changelog/db.changelog6-addEquipmentToOperation.sql
-#  - include:
-#      file: db/changelog/db.changelog0-truncate.sql

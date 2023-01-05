@@ -20,7 +20,7 @@
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <h1 th:text="${equipment.equipmentName}" class="display-3"></h1>
-            <h3 th:text="${equipment.equipmentDescription}"></h3>
+            <h3 th:text="${equipment.equipmentDescription}"></h3><br><br>
             <!-- SUBMITTING OPERATION FORM -->
             <h3>Submit operation</h3>
             <form th:action="@{/equipment/equipmentPage/{id} (id = ${equipment.id})}" th:object="${newOp}"
@@ -45,8 +45,11 @@
                 <button class="btn btn-success">Submit</button>
             </form>
         </div>
-        <!-- ALL OPERATIONS FORMATTED -->
+        <!-- ALL OPERATIONS FORMATTED BY CURRENT EQUIPMENT -->
         <div class="col-10 text-center mt-5">
+            <div class="text-center">
+                <h3 th:text="'Operation Log'"></h3>
+            </div>
             <table class="table table-bordered">
                 <thead>
                 <tr>
