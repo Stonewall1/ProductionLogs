@@ -12,6 +12,6 @@ databaseChangeLog:
   - include:
       file: db/changelog/db.changelog6-addEquipmentToOperation.sql
   - include:
-      file: db/changelog/db.changelog7-createSubdivisionTable.sql
+      file: db/changelog/db.changelog7-createDepartmentTable.sql
   - include:
-      file: db/changelog/db.changelog8-joinSubdivision&UserTables.sql
+      file: db/changelog/db.changelog8-joinDepartment&UserTables.sql

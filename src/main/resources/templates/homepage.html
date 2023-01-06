@@ -8,11 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-4 text-center mt-5 ">
-            <div class="col-10 text-center mt-5">
-                <a th:href="@{equipment/newEquipment}" class="btn btn-primary">Add new equipment</a>
-                <h3>Equipment</h3>
+    <div class="container content-center mt-5">
+        <div class="row">
+            <div class="col-4">
+                <h3>Equipment <a th:href="@{equipment/newEquipment}" class="btn btn-primary">Add new equipment</a></h3>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -37,6 +36,9 @@
                         </td>
                     </tbody>
                 </table>
+            </div>
+            <div class="col-4">
+                <h3>Departments <a th:href="@{department/newDepartment}" class="btn btn-primary">Add new department</a></h3>
             </div>
         </div>
     </div>

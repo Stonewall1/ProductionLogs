@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "subdivisions")
+@Table(name = "departments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Subdivision {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String subdivisionName;
+    private String departmentName;
     @OneToMany
-    private List<User> subdivisionStaff;
+    private List<User> departmentStaff;
 }
