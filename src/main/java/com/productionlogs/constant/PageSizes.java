@@ -1,5 +1,5 @@
 package com.productionlogs.constant;
 
 public class PageSizes {
-    public static final int PAGE_SIZE = 8;
+    public static final int PAGE_SIZE = 5;
 }

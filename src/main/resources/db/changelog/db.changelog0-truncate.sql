@@ -4,4 +4,4 @@
 
 --comment: truncate tables
 
-TRUNCATE TABLE users , r1
+-- TRUNCATE TABLE
