@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -19,6 +21,9 @@ public class User {
     private String firstName;
     @NotBlank(message = "Field cant be empty!")
     private String lastName;
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles;
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;

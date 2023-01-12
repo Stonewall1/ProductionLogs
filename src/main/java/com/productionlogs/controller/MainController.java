@@ -20,4 +20,8 @@ public class MainController {
         model.addAttribute("allEquipment", equipmentService.findAllEquipment());
         return "homepage";
     }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
