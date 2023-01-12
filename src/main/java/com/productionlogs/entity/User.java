@@ -17,6 +17,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String username;
+    private String password;
     @NotBlank(message = "Field cant be empty!")
     private String firstName;
     @NotBlank(message = "Field cant be empty!")

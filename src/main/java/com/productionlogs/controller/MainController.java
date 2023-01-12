@@ -1,6 +1,7 @@
 package com.productionlogs.controller;
 
 import com.productionlogs.service.EquipmentService;
+import com.productionlogs.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
     private final EquipmentService equipmentService;
+    private final UserService userService;
 
-    public MainController(EquipmentService equipmentService) {
+    public MainController(EquipmentService equipmentService, UserService userService) {
         this.equipmentService = equipmentService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -20,8 +23,10 @@ public class MainController {
         model.addAttribute("allEquipment", equipmentService.findAllEquipment());
         return "homepage";
     }
+
     @GetMapping("/login")
-    public String login(){
+    public String login() {
+        userService.createAdmin();
         return "login";
     }
 }
