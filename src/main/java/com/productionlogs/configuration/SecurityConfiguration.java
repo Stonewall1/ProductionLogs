@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/department/newDepartment", "/equipment/newEquipment").hasAuthority("ADMIN")
+                .antMatchers("/department/newDepartment", "/equipment/newEquipment").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -66,6 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("test")
                 .password(passwordEncoder().encode("111"))
-                .roles("ADMIN");
+                .authorities("ADMIN");
     }
 }
