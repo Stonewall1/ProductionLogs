@@ -42,4 +42,9 @@ public class UserService implements UserDetailsService {
             userRepository.save(admin);
         }
     }
+
+    public User findByUsername(String username) {
+        return findByUsername(username);
+    }
+
 }

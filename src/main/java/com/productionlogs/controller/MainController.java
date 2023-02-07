@@ -21,6 +21,13 @@ public class MainController {
     @GetMapping
     public String homepage(Model model) {
         model.addAttribute("allEquipment", equipmentService.findAllEquipment());
+        /**
+         * SecurityContextHolder test
+         */
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String username = ((UserDetails) principal).getUsername();
+//        model.addAttribute("current", username);
+
         return "homepage";
     }
 

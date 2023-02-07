@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private String firstName;
     @NotBlank(message = "Field cant be empty!")
     private String lastName;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
 
