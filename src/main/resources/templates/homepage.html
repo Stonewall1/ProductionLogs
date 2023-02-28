@@ -9,6 +9,9 @@
 <body>
 <div class="container">
     <div class="container content-center mt-5">
+        <form th:action="@{/logout}" method="post" >
+           <button class="btn btn-danger"> Logout</button>
+        </form>
         <div class="row">
             <div class="col-4">
                 <h3>Equipment <a th:href="@{equipment/newEquipment}" class="btn btn-primary">Add new equipment</a></h3>
