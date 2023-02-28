@@ -5,7 +5,6 @@ import com.productionlogs.dto.OperationDto;
 import com.productionlogs.entity.Operation;
 import com.productionlogs.service.EquipmentService;
 import com.productionlogs.service.JournalService;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/journal")

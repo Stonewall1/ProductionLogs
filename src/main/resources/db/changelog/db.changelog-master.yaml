@@ -15,3 +15,5 @@ databaseChangeLog:
       file: db/changelog/db.changelog7-createDepartmentTable.sql
   - include:
       file: db/changelog/db.changelog8-joinDepartment&UserTables.sql
+  - include:
+      file: db/changelog/db.changelog9-alterUserTable.sql
