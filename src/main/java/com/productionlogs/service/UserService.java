@@ -1,8 +1,10 @@
 package com.productionlogs.service;
 
+import com.productionlogs.dto.UserDto;
 import com.productionlogs.entity.User;
 import com.productionlogs.entity.UserRole;
 import com.productionlogs.repository.UserRepository;
+import com.productionlogs.service.mapper.UserMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,9 +20,11 @@ import java.util.Set;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -47,4 +51,13 @@ public class UserService implements UserDetailsService {
         return findByUsername(username);
     }
 
+    public User mapToUser(UserDto userDto) {
+        return userMapper.mapUserDtoToUser(userDto);
+    }
+
+    public void save(User user) {
+        user.setUser_password(encoder.encode(user.getPassword()));
+        user.setRoles(Set.of(UserRole.WORKER));
+        userRepository.save(user);
+    }
 }

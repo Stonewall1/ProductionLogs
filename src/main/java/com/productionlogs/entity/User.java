@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 
@@ -22,9 +21,7 @@ public class User implements UserDetails {
     private long id;
     private String username;
     private String user_password;
-    @NotBlank(message = "Field cant be empty!")
     private String firstName;
-    @NotBlank(message = "Field cant be empty!")
     private String lastName;
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
