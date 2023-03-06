@@ -3,6 +3,7 @@ package com.productionlogs.service;
 import com.productionlogs.dto.UserDto;
 import com.productionlogs.entity.User;
 import com.productionlogs.entity.UserRole;
+import com.productionlogs.exception.IDNotFoundException;
 import com.productionlogs.repository.UserRepository;
 import com.productionlogs.service.mapper.UserMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,5 +60,13 @@ public class UserService implements UserDetailsService {
         user.setUser_password(encoder.encode(user.getPassword()));
         user.setRoles(Set.of(UserRole.WORKER));
         userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User findById(long id) {
+        Optional<User> byId = userRepository.findById(id);
+        if (byId.isPresent()) {
+            return byId.get();
+        } else throw new IDNotFoundException();
     }
 }

@@ -3,12 +3,14 @@ package com.productionlogs.controller;
 import com.productionlogs.constant.PageSizes;
 import com.productionlogs.dto.OperationDto;
 import com.productionlogs.entity.Operation;
+import com.productionlogs.entity.User;
 import com.productionlogs.service.EquipmentService;
 import com.productionlogs.service.JournalService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,9 @@ public class JournalController {
             model.addAttribute("url", "/equipment/equipmentPage/" + id);
             return "equipment/equipmentPage";
         }
-        Operation operation = journalService.mapToOperationAndBindEquipment(operationDto, equipmentService.findByID(id));
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Operation op = journalService.mapToOperationAndBindEquipment(operationDto, equipmentService.findByID(id));
+        Operation operation = journalService.setUser(op, principal);
         journalService.save(operation);
         return "redirect:/equipment/equipmentPage/" + id;
     }

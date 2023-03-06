@@ -68,7 +68,7 @@
                     <td th:text="${#temporals.format(operation.operationStart, 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="${operation.operationDescription}"></td>
                     <td th:text="${#temporals.format(operation.operationFinish, 'dd.MM.yyyy HH:mm')}"></td>
-                    <td th:text="'RESERVED'"></td>
+                    <td th:text="${operation.user.username}"></td>
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
                         <td th:text="${operation.operationStatus}" style="color: red"></td>
                     </th:block>
@@ -86,7 +86,7 @@
                             </td>
                         </th:block>
                         <th:block sec:authorize="hasAuthority('WORKER')">
-                           <td></td>
+                            <td></td>
                         </th:block>
                     </th:block>
 

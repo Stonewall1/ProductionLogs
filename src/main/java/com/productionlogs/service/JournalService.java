@@ -4,6 +4,7 @@ import com.productionlogs.dto.OperationDto;
 import com.productionlogs.entity.Equipment;
 import com.productionlogs.entity.Operation;
 import com.productionlogs.entity.OperationStatus;
+import com.productionlogs.entity.User;
 import com.productionlogs.exception.IDNotFoundException;
 import com.productionlogs.repository.OperationRepository;
 import com.productionlogs.service.mapper.JournalMapper;
@@ -28,11 +29,15 @@ public class JournalService {
         this.journalMapper = journalMapper;
     }
 
-    //  TODO adding user here
 
     public void save(Operation operation) {
         operation.setOperationStatus(OperationStatus.UNVERIFIED);
         operationRepository.save(operation);
+    }
+
+    public Operation setUser(Operation operation, User user) {
+        operation.setUser(user);
+        return operation;
     }
 
     public Operation mapToOperationAndBindEquipment(OperationDto operationDto, Equipment equipment) {
