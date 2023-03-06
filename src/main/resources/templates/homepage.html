@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
@@ -9,12 +9,13 @@
 <body>
 <div class="container">
     <div class="container content-center mt-5">
-        <form th:action="@{/logout}" method="post" >
-           <button class="btn btn-danger"> Logout</button>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn btn-danger"> Logout</button>
         </form>
         <div class="row">
             <div class="col-4">
-                <h3>Equipment <a th:href="@{equipment/newEquipment}" class="btn btn-primary">Add new equipment</a></h3>
+                <h3>Equipment <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/equipment/newEquipment}"
+                                 class="btn btn-primary">Add new equipment</a></h3>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -41,11 +42,15 @@
                 </table>
             </div>
             <div class="col-4">
-                <h3>Departments <a th:href="@{department/newDepartment}" class="btn btn-primary">Add new department</a>
+                <h3>Departments
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/department/newDepartment}"
+                       class="btn btn-primary">Add new department</a>
                 </h3>
             </div>
             <div class="col-4">
-                <h3>Users <a th:href="@{user/newUser}" class="btn btn-primary">Add new User</a>
+                <h3>Users
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/user/newUser}" class="btn btn-primary">Add new
+                        User</a>
                 </h3>
             </div>
         </div>

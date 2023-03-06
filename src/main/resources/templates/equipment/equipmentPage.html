@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Equipment Page</title>
@@ -59,9 +59,7 @@
                     <th scope="col">Operation finish</th>
                     <th scope="col">Operator</th>
                     <th scope="col">Operation status</th>
-                    <!-- ADMIN ROLE CHECKING -->
                     <th scope="col">Verification</th>
-                    <!--                        -->
                 </tr>
                 </thead>
                 <tbody>
@@ -77,15 +75,21 @@
                     <th:block th:if="${operation.operationStatus.name() == 'VERIFIED'}">
                         <td th:text="${operation.operationStatus}" style="color: green"></td>
                     </th:block>
-                    <!-- ADMIN ROLE CHECKING -->
+
                     <th:block th:if="${operation.operationStatus.name() == 'UNVERIFIED'}">
-                        <td>
-                            <form th:action="@{/journal/{id}/{operId}/{page}/updateStatus (id = ${equipment.id} , operId = ${operation.id}, page = ${allOps.getNumber()})}"
-                                  method="post">
-                                <button class="btn btn-outline-success">Verify</button>
-                            </form>
-                        </td>
+                        <th:block sec:authorize="hasAuthority('ADMIN')">
+                            <td>
+                                <form th:action="@{/journal/{id}/{operId}/{page}/updateStatus (id = ${equipment.id} , operId = ${operation.id}, page = ${allOps.getNumber()})}"
+                                      method="post">
+                                    <button class="btn btn-outline-success">Verify</button>
+                                </form>
+                            </td>
+                        </th:block>
+                        <th:block sec:authorize="hasAuthority('WORKER')">
+                           <td></td>
+                        </th:block>
                     </th:block>
+
                     <th:block th:if="${operation.operationStatus.name() == 'VERIFIED'}">
                         <td>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -95,7 +99,6 @@
                         </td>
                     </th:block>
                 </tr>
-                <!--                        -->
                 </tbody>
             </table>
             <!-- PAGINATION -->
